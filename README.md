@@ -36,4 +36,4 @@ mnc2nii.py
  - [minc2.py](https://github.com/nipy/nibabel/blob/84294f4e05e0f10f9cc64d3474f94ad3e243f682/nibabel/minc2.py#L144) nibabel Python class for reading MINC2 (HDF5) images.
  - [minc1.py](https://github.com/nipy/nibabel/blob/84294f4e05e0f10f9cc64d3474f94ad3e243f682/nibabel/minc1.py) nibabel Python class for reading MINC1 (netcdf) images.
  - [minc_to_nifti.py](https://gist.github.com/ofgulban/46d5c51ea010611cbb53123bb5906ca9) is a minimal nibabel wrapper for converting MINC images to NIfTI, but unlike `mnc2nii.py` it does not preserve details such as the spatial transfomation affine matrix.
- 
+ - [minc-loader](https://github.com/rordenlab/minc-loader) is a NiiVue reader plugin for MINC1 and MINC2 images. This JavaScript reader can be used for web pages as well as node command line usage.
