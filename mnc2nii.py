@@ -3,6 +3,8 @@
 import nibabel as nib
 import os
 import sys
+import h5py
+import numpy as np
 
 def convert_mnc_to_nifti(input_file, output_file=None):
     if not input_file.endswith('.mnc'):
@@ -15,7 +17,14 @@ def convert_mnc_to_nifti(input_file, output_file=None):
         sys.exit(1)
     try:
         img = nib.load(input_file)
+        header = img.header
         data = img.get_fdata()
+        if data.ndim == 4:
+            with h5py.File(input_file, "r") as f:
+                # MINC2 stores dimensions under 'minc-2.0/image/0/image'
+                dimorder = f["minc-2.0/image/0/image"].attrs["dimorder"].decode()
+                if dimorder.startswith("time,"):
+                     data = np.transpose(data, (1, 2, 3, 0))
         affine = img.affine
         nifti_img = nib.Nifti1Image(data, affine)
         nifti_img.header.set_qform(affine)
